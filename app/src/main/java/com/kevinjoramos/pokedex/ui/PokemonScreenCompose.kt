@@ -26,7 +26,7 @@ fun PokemonScreenComposable() {
             .background(Color.LightGray)
     ) {
         Column(
-            modifier = Modifier
+            modifier = Modifiergit 
                 .padding(top = 32.dp, start = 16.dp, end = 16.dp)
                 .fillMaxSize()
                 .background(Color.Gray)
