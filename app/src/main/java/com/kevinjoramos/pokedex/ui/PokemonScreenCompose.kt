@@ -5,10 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +29,7 @@ import com.kevinjoramos.pokedex.models.Pokemon
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun PokemonScreenComposable() {
-    PokemonScreenBackground() {
+    PokemonScreenBackground {
         Text(text = "Pokedex", style = TextStyle(fontSize = 32.sp))
         Spacer(modifier = Modifier.height(32.dp))
         PokemonLazyColumn(
@@ -38,19 +41,50 @@ fun PokemonScreenComposable() {
 
 @Composable
 fun PokemonScreenBackground(content: @Composable () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.pokedex_background),
-            contentDescription = "background",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillHeight
-        )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
+        Spacer(modifier = Modifier.height(20.dp))
+        NavigationBar()
+        Spacer(modifier = Modifier.height(10.dp))
         Column(
             modifier = Modifier
-                .padding(top = 32.dp, start = 30.dp, end = 30.dp)
+                .padding(start = 30.dp, end = 30.dp)
                 .fillMaxSize()
+                .background(Color.White)
         ) {
             content()
+        }
+    }
+}
+
+@Composable
+fun NavigationBar() {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 18.dp)
+    ) {
+        IconButton(
+            onClick = { /*TODO*/ },
+
+            ) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Back"
+            )
+        }
+        IconButton(
+            onClick = { /*TODO*/ },
+
+            ) {
+            Icon(
+                imageVector = Icons.Default.List,
+                contentDescription = "Back"
+            )
         }
     }
 }
@@ -65,17 +99,16 @@ fun PokemonLazyColumn(pokemonList: List<String>) {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                EntryCard(pokemonList[pokemon], Modifier.weight(1f))
+                EntryCard(1, pokemonList[pokemon], listOf<String>(), Modifier.weight(1f))
                 Spacer(modifier = Modifier.width(10.dp))
-                EntryCard(pokemonList[pokemon], Modifier.weight(1f))
-            }
+                EntryCard(1, pokemonList[pokemon], listOf<String>(), Modifier.weight(1f))            }
 
         }
     }
 }
 
 @Composable
-fun EntryCard(pokemon: String, modifier: Modifier) {
+fun EntryCard(id: Int, name: String, types: List<String>, modifier: Modifier) {
     Card(
         shape = RoundedCornerShape(10.dp),
         elevation = 10.dp,
@@ -89,7 +122,7 @@ fun EntryCard(pokemon: String, modifier: Modifier) {
         ) {
             Column() {
                 Text(
-                    text = pokemon,
+                    text = name,
                     style = TextStyle(color = Color.White),
                     maxLines = 1
                 )
@@ -105,14 +138,6 @@ fun EntryCard(pokemon: String, modifier: Modifier) {
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = "#001")
-                Image(
-                    painter = painterResource(id = R.drawable.pokedex_background),
-                    contentDescription = "pokemon sprite placeholder",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(50.dp)
-                        .clip(RectangleShape)
-                )
             }
         }
     }

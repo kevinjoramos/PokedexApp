@@ -76,6 +76,9 @@ dependencies {
 
     // Live data builders
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+
+    //Accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 }
 
 kapt {
