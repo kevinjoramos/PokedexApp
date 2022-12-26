@@ -18,7 +18,9 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.kevinjoramos.pokedex.PokemonScreenComposable
 import com.kevinjoramos.pokedex.ui.theme.PokedexTheme
 import com.kevinjoramos.pokedex.viewmodel.PokedexViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     //font Archivo Black https://fonts.google.com/specimen/Archivo+Black?preview.text=Pokedex&preview.text_type=custom&thickness=8
     //font ui numbering https://fonts.google.com/specimen/Kanit?preview.text=%23001&preview.text_type=custom&thickness=8
@@ -28,14 +30,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val systemUiController = rememberSystemUiController()
-            SideEffect {
-                systemUiController.setStatusBarColor(
-                    color = Color.White,
-                    darkIcons = true
-                )
+            PokedexTheme {
+                val systemUiController = rememberSystemUiController()
+                SideEffect {
+                    systemUiController.setStatusBarColor(
+                        color = Color.White,
+                        darkIcons = true
+                    )
+                }
+                PokemonScreenComposable()
             }
-            PokemonScreenComposable()
         }
     }
 }

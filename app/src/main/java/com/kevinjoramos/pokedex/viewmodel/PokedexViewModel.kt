@@ -7,13 +7,17 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.kevinjoramos.pokedex.models.Pokemon
 import com.kevinjoramos.pokedex.repository.PokedexRepository
+import com.kevinjoramos.pokedex.repository.PokedexRepositoryImpl
 import com.kevinjoramos.pokedex.repository.PokemonService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PokedexViewModel : ViewModel() {
+@HiltViewModel
+class PokedexViewModel @Inject constructor(
+    private val pokedexRepository: PokedexRepository
+): ViewModel() {
 
-    private val repository = PokedexRepository(PokemonService())
-
-    val pokemonData = liveData { repository.getClefairyData()?.let { emit(it) } }
+    //val pokemonData = liveData { pokedexRepository.getClefairyData()?.let { emit(it) } }
 }
