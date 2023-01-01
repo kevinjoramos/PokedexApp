@@ -1,40 +1,38 @@
 package com.kevinjoramos.pokedex
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kevinjoramos.pokedex.models.Pokemon
+import com.kevinjoramos.pokedex.models.overview.PokemonOverview
+import com.kevinjoramos.pokedex.models.NetworkResult
 
-@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun PokemonScreenComposable() {
+fun PokemonScreenComposable(pokemonOverview: State<NetworkResult<PokemonOverview>?>) {
+    println(pokemonOverview.value.toString())
     PokemonScreenBackground {
         Text(text = "Pokedex", style = TextStyle(fontSize = 32.sp))
         Spacer(modifier = Modifier.height(32.dp))
-        PokemonLazyColumn(
-            pokemonList = (listOf("Bulbasaur", "Charmander", "Ivysuar", "Venasuar", "Charmeoleon",
-            "Charizard")))
+
+        val overviewValue = pokemonOverview.value
+        when (overviewValue) {
+            is NetworkResult.Success<PokemonOverview> -> PokemonLazyColumn(overviewValue.data)
+            is NetworkResult.Loading<PokemonOverview> -> Text((overviewValue).message)
+            is NetworkResult.Error<PokemonOverview> -> Text("Sorry we had some trouble loading the data.")
+            else -> {}
+        }
     }
 
 }
@@ -90,18 +88,18 @@ fun NavigationBar() {
 }
 
 @Composable
-fun PokemonLazyColumn(pokemonList: List<String>) {
+fun PokemonLazyColumn(pokemonOverview: PokemonOverview) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        items(pokemonList.size) { pokemon->
+        items(pokemonOverview.pokemonOverviewEntryList.size) { pokemon->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                EntryCard(1, pokemonList[pokemon], listOf<String>(), Modifier.weight(1f))
+                EntryCard(1, pokemonOverview.pokemonOverviewEntryList[pokemon].name, listOf<String>(), Modifier.weight(1f))
                 Spacer(modifier = Modifier.width(10.dp))
-                EntryCard(1, pokemonList[pokemon], listOf<String>(), Modifier.weight(1f))            }
+                EntryCard(1, pokemonOverview.pokemonOverviewEntryList[pokemon].name, listOf<String>(), Modifier.weight(1f))            }
 
         }
     }
