@@ -1,4 +1,4 @@
-package com.kevinjoramos.pokedex
+package com.kevinjoramos.pokedex.di.component
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

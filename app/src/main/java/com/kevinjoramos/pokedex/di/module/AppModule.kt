@@ -1,4 +1,4 @@
-package com.kevinjoramos.pokedex.di
+package com.kevinjoramos.pokedex.di.module
 
 import com.kevinjoramos.pokedex.constants.ApiConstants
 import com.kevinjoramos.pokedex.repository.PokemonApi

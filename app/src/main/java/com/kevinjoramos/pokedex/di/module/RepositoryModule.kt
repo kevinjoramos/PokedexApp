@@ -1,4 +1,4 @@
-package com.kevinjoramos.pokedex.di
+package com.kevinjoramos.pokedex.di.module
 
 import com.kevinjoramos.pokedex.repository.PokedexRepository
 import com.kevinjoramos.pokedex.repository.PokedexRepositoryImpl
