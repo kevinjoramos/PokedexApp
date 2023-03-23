@@ -9,6 +9,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.kevinjoramos.pokedex.PokemonScreenComposable
 import com.kevinjoramos.pokedex.presentation.theme.PokedexTheme
 import com.kevinjoramos.pokedex.presentation.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint

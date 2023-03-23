@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kevinjoramos.pokedex.domain.model.PokemonOverview
+import com.kevinjoramos.pokedex.domain.model.old.PokemonOverview
 import com.kevinjoramos.pokedex.data.remote.NetworkResult
 
 @Composable

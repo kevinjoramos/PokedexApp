@@ -81,6 +81,10 @@ dependencies {
 
     //Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
+
+    //MockK
+    testImplementation "io.mockk:mockk:1.13.4"
+
 }
 
 kapt {

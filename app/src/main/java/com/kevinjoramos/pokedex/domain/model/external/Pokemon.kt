@@ -1,22 +1,18 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Pokemon(
-    val abilities: List<Ability>,
-    val base_experience: Int,
-    val forms: List<Form>,
-    val game_indices: List<GameIndice>,
-    val height: Int,
-    val held_items: List<Any>,
-    val id: Int,
-    val is_default: Boolean,
-    val location_area_encounters: String,
-    val moves: List<Move>,
-    val name: String,
-    val order: Int,
-    val past_types: List<Any>,
-    val species: Species,
-    val sprites: Sprites,
-    val stats: List<Stat>,
-    val types: List<Type>,
-    val weight: Int
+    @JsonProperty("abilities") val abilities: List<Ability>,
+    @JsonProperty("height") val height: Int,
+    @JsonProperty("id") val id: Int,
+    @JsonProperty("moves") val moves: List<Move>,
+    @JsonProperty("name") val name: String,
+    @JsonProperty("species") val species: Species,
+    @JsonProperty("sprites") val sprites: Sprites,
+    @JsonProperty("stats") val stats: List<Stat>,
+    @JsonProperty("types") val types: List<Type>,
+    @JsonProperty("weight") val weight: Int
 )

@@ -1,7 +1,7 @@
 package com.kevinjoramos.pokedex.data.repository
 
 import com.kevinjoramos.pokedex.data.remote.NetworkResult
-import com.kevinjoramos.pokedex.domain.model.PokemonOverview
+import com.kevinjoramos.pokedex.domain.model.old.PokemonOverview
 import com.kevinjoramos.pokedex.domain.repository.PokemonDataRepository
 import com.kevinjoramos.pokedex.data.remote.PokemonService
 import javax.inject.Inject
