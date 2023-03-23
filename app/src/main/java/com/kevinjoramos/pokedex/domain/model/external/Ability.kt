@@ -1,7 +1,9 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Ability(
-    val ability: AbilityX,
-    val is_hidden: Boolean,
-    val slot: Int
+    @JsonProperty("ability") val ability: AbilityX,
 )

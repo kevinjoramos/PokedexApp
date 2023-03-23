@@ -1,6 +1,8 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class Species(
-    val name: String,
-    val url: String
+    @JsonProperty("name") val name: String,
+    @JsonProperty("url") val url: String
 )

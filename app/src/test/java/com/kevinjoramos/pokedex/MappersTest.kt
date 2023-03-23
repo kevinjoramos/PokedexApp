@@ -4,15 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.kevinjoramos.pokedex.domain.mappers.toPokemonEntryModel
 import com.kevinjoramos.pokedex.domain.model.external.Pokemon
 import com.kevinjoramos.pokedex.domain.model.internal.PokemonEntryModel
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Assert
 import org.junit.Test
 import java.io.File
+import kotlin.math.exp
 
 class MappersTest {
 
     private val pokemonModel: Pokemon
 
     init {
-        val mapper: ObjectMapper = ObjectMapper()
+        val mapper = ObjectMapper()
         pokemonModel = mapper.readValue(File("resources/pokemon_bulbasaur.json"), Pokemon::class.java)
     }
 
@@ -21,7 +24,7 @@ class MappersTest {
         val expected = PokemonEntryModel(
             id = 1,
             name = "bulbasaur",
-            sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+            sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
             types = listOf("grass", "poison"),
             isFavorite = false,
             about =  PokemonEntryModel.About(
@@ -70,5 +73,7 @@ class MappersTest {
         )
 
         val pokemonEntryModel = pokemonModel.toPokemonEntryModel()
+
+        Assert.assertTrue(pokemonEntryModel == expected)
     }
 }

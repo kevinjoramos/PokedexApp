@@ -1,7 +1,9 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Other(
-    val dream_world: DreamWorld,
-    val home: Home,
-    val official-artwork: OfficialArtwork
+    @JsonProperty("official-artwork") val officialArtwork: OfficialArtwork
 )

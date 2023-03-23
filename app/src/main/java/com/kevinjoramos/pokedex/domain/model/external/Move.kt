@@ -1,6 +1,10 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Move(
-    val move: MoveX,
-    val version_group_details: List<VersionGroupDetail>
+    @JsonProperty("move") val move: MoveX,
+    @JsonProperty("version_group_details") val versionGroupDetails: List<VersionGroupDetail>
 )

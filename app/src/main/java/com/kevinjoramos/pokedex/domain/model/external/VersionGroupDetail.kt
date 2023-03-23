@@ -1,7 +1,9 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class VersionGroupDetail(
-    val level_learned_at: Int,
-    val move_learn_method: MoveLearnMethod,
-    val version_group: VersionGroup
+    @JsonProperty("level_learned_at") val levelLearnedAt: Int,
+    @JsonProperty("move_learn_method") val moveLearnMethod: MoveLearnMethod,
+    @JsonProperty("version_group") val versionGroup: VersionGroup
 )
