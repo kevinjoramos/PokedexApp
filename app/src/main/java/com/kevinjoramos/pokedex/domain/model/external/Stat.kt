@@ -1,7 +1,10 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Stat(
-    val base_stat: Int,
-    val effort: Int,
-    val stat: StatX
+    @JsonProperty("base_stat") val baseStat: Int,
+    @JsonProperty("stat") val stat: StatX
 )

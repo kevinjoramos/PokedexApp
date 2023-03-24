@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Pokemon(
     @JsonProperty("abilities") val abilities: List<Ability>,
+    @JsonProperty("base_experience") val baseExperience: Int,
     @JsonProperty("height") val height: Int,
     @JsonProperty("id") val id: Int,
     @JsonProperty("moves") val moves: List<Move>,

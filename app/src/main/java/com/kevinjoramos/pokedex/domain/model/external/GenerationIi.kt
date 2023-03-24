@@ -1,7 +1,0 @@
-package com.kevinjoramos.pokedex.domain.model.external
-
-data class GenerationIi(
-    val crystal: Crystal,
-    val gold: Gold,
-    val silver: Silver
-)
