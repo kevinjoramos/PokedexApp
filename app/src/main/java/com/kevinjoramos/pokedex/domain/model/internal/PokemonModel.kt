@@ -1,6 +1,6 @@
 package com.kevinjoramos.pokedex.domain.model.internal
 
-data class PokemonEntryModel(
+data class PokemonModel(
     val id: Int,
     val name: String,
     val sprite: String,
@@ -17,7 +17,9 @@ data class PokemonEntryModel(
         val height: Int,
         val weight: Int,
         val abilities: List<String>,
-        val breeding: Breeding)
+        val breeding: Breeding,
+        val baseExperience: Int
+    )
 
     data class Breeding(
         val genderRate: Int,
@@ -32,13 +34,20 @@ data class PokemonEntryModel(
         val spAtk: Int,
         val spDef: Int,
         val speed: Int,
-        val typeDefenses: List<String>
+        val defenses: List<TypeWeighted>,
+        val advantages: List<TypeWeighted>
+    )
+
+    data class TypeWeighted(
+        val name: String,
+        val weight: Float
     )
 
     data class Evolution(
         val before: String,
         val after: String,
-        val requirements: List<String>
+        val requirementLevel: Int,
+        val otherRequirements: List<String>
     )
 
     data class Move(

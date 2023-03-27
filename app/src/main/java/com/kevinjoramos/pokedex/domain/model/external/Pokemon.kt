@@ -11,7 +11,7 @@ data class Pokemon(
     @JsonProperty("id") val id: Int,
     @JsonProperty("moves") val moves: List<Move>,
     @JsonProperty("name") val name: String,
-    @JsonProperty("species") val species: Species,
+    @JsonProperty("species") val species: SpeciesX,
     @JsonProperty("sprites") val sprites: Sprites,
     @JsonProperty("stats") val stats: List<Stat>,
     @JsonProperty("types") val types: List<Type>,

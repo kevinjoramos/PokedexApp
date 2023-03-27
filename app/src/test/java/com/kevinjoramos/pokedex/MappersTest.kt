@@ -3,77 +3,454 @@ package com.kevinjoramos.pokedex
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.kevinjoramos.pokedex.domain.mappers.toPokemonEntryModel
 import com.kevinjoramos.pokedex.domain.model.external.Pokemon
-import com.kevinjoramos.pokedex.domain.model.internal.PokemonEntryModel
-import org.hamcrest.MatcherAssert.assertThat
+import com.kevinjoramos.pokedex.domain.model.internal.PokemonModel
 import org.junit.Assert
 import org.junit.Test
 import java.io.File
-import kotlin.math.exp
 
 class MappersTest {
+    private val mapper = ObjectMapper()
 
-    private val pokemonModel: Pokemon
+    private val bulbasaur: Pokemon =
+        mapper.readValue(File("resources/bulbasaur.json"), Pokemon::class.java)
 
-    init {
-        val mapper = ObjectMapper()
-        pokemonModel = mapper.readValue(File("resources/pokemon_bulbasaur.json"), Pokemon::class.java)
-    }
+    private val mantyke: Pokemon =
+        mapper.readValue(File("resources/mantyke.json"), Pokemon::class.java)
+
+    private val onix: Pokemon =
+        mapper.readValue(File("resources/onix.json"), Pokemon::class.java)
+
+    private val machop: Pokemon =
+        mapper.readValue(File("resources/machop.json"), Pokemon::class.java)
+
+    private val eevee: Pokemon =
+        mapper.readValue(File("resources/eevee.json"), Pokemon::class.java)
+
 
     @Test
-    fun pokemonToPokemonEntryModelMapperSuccess() {
-        val expected = PokemonEntryModel(
+    /*
+    Basic test that mapper works as intended for general use.
+     */
+    fun bulbasaurToPokemonModel() {
+        val expected = PokemonModel(
             id = 1,
             name = "bulbasaur",
             sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
             types = listOf("grass", "poison"),
             isFavorite = false,
-            about =  PokemonEntryModel.About(
-                species = "seed", //another call
+            about =  PokemonModel.About(
+                species = "seed",
                 height = 7,
                 weight = 69,
                 abilities = listOf("overgrow", "chlorophyll"),
-                breeding = PokemonEntryModel.Breeding(
-                    genderRate = 1, // another call
-                    eggGroups = "Monster", //antother call
+                breeding = PokemonModel.Breeding(
+                    genderRate = 1,
+                    eggGroups = "Monster",
                     eggCycle = "Grass" //another call
-                )
+                ),
+                baseExperience = 64
             ),
-            baseStats = PokemonEntryModel.BaseStats(
+            baseStats = PokemonModel.BaseStats(
                 hp = 45,
                 attack = 49,
                 defense = 49,
                 spAtk = 65,
                 spDef = 65,
                 speed = 45,
-                typeDefenses = listOf()
+                defenses = listOf(
+                    PokemonModel.TypeWeighted(
+                        name = "bug",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dark",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dragon",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "electric",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fairy",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fire",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fighting",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "flying",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "grass",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ghost",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ground",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ice",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "normal",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "poison",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "psychic",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "water",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "rock",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "steel",
+                        weight = 1f
+                    )
+                ),
+                advantages = listOf(
+                    PokemonModel.TypeWeighted(
+                        name = "bug",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dark",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dragon",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "electric",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fairy",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fire",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fighting",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "flying",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "grass",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ghost",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ground",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ice",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "normal",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "poison",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "psychic",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "water",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "rock",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "steel",
+                        weight = 1f
+                    )
+                )
             ),
-            evolution = listOf<PokemonEntryModel.Evolution>(), //anothercall
+            evolution = listOf(
+                PokemonModel.Evolution(
+                    before = "bulbasuar",
+                    after = "ivysaur",
+                    requirementLevel = 16,
+                    otherRequirements = listOf()
+                ),
+                PokemonModel.Evolution(
+                    before = "ivysaur",
+                    after = "venusaur",
+                    requirementLevel = 32,
+                    otherRequirements = listOf()
+                )
+            ), //anothercall
             moves = listOf(
-                PokemonEntryModel.Move("razor-wind", 0),
-                PokemonEntryModel.Move("swords-dance", 0),
-                PokemonEntryModel.Move("cut", 0),
-                PokemonEntryModel.Move("bind", 0),
-                PokemonEntryModel.Move("vine-whip", 0),
-                PokemonEntryModel.Move("headbutt", 0),
-                PokemonEntryModel.Move("tackle", 0),
-                PokemonEntryModel.Move("body-slam", 0),
-                PokemonEntryModel.Move("take-down", 0),
-                PokemonEntryModel.Move("double-edge", 0),
-                PokemonEntryModel.Move("growl", 0),
-                PokemonEntryModel.Move("strength", 0),
-                PokemonEntryModel.Move("mega-drain", 0),
-                PokemonEntryModel.Move("leech-seed", 0),
-                PokemonEntryModel.Move("growth", 0),
-                PokemonEntryModel.Move("razor-leaf", 0),
-                PokemonEntryModel.Move("solar-beam", 0),
-                PokemonEntryModel.Move("poison-powder", 0),
-                PokemonEntryModel.Move("sleep-powder", 0),
-                PokemonEntryModel.Move("petal-dance", 0),
+                PokemonModel.Move("growl", 1),
+                PokemonModel.Move("tackle", 1),
+                PokemonModel.Move("vine-whip", 3),
+                PokemonModel.Move("growth", 6),
+                PokemonModel.Move("leech-seed", 9),
+                PokemonModel.Move("razor-leaf", 12),
+                PokemonModel.Move("poison-powder", 15),
+                PokemonModel.Move("sleep-powder", 15),
+                PokemonModel.Move("seed-bomb", 18),
+                PokemonModel.Move("take-down", 21),
+                PokemonModel.Move("sweet-scent", 24),
+                PokemonModel.Move("synthesis", 27),
+                PokemonModel.Move("worry-seed", 30),
+                PokemonModel.Move("double-edge", 33),
+                PokemonModel.Move("solar-beam", 36)
             )
         )
 
-        val pokemonEntryModel = pokemonModel.toPokemonEntryModel()
+        Assert.assertTrue(bulbasaur.toPokemonEntryModel() == expected)
+    }
 
-        Assert.assertTrue(pokemonEntryModel == expected)
+    @Test
+    fun mantykeToPokemonModel() {
+        val expected = PokemonModel(
+            id = 1,
+            name = "bulbasaur",
+            sprite = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            types = listOf("grass", "poison"),
+            isFavorite = false,
+            about =  PokemonModel.About(
+                species = "seed", //another call
+                height = 7,
+                weight = 69,
+                abilities = listOf("overgrow", "chlorophyll"),
+                breeding = PokemonModel.Breeding(
+                    genderRate = 1, // another call
+                    eggGroups = "Monster", //antother call
+                    eggCycle = "Grass" //another call
+                ),
+                baseExperience = 64
+            ),
+            baseStats = PokemonModel.BaseStats(
+                hp = 45,
+                attack = 49,
+                defense = 49,
+                spAtk = 65,
+                spDef = 65,
+                speed = 45,
+                defenses = listOf(
+                    PokemonModel.TypeWeighted(
+                        name = "bug",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dark",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dragon",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "electric",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fairy",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fire",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fighting",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "flying",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "grass",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ghost",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ground",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ice",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "normal",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "poison",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "psychic",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "water",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "rock",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "steel",
+                        weight = 1f
+                    )
+                ),
+                advantages = listOf(
+                    PokemonModel.TypeWeighted(
+                        name = "bug",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dark",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "dragon",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "electric",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fairy",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fire",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "fighting",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "flying",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "grass",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ghost",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ground",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "ice",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "normal",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "poison",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "psychic",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "water",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "rock",
+                        weight = 1f
+                    ),
+                    PokemonModel.TypeWeighted(
+                        name = "steel",
+                        weight = 1f
+                    )
+                )
+            ),
+            evolution = listOf(
+                PokemonModel.Evolution(
+                    before = "bulbasuar",
+                    after = "ivysaur",
+                    requirementLevel = 16,
+                    otherRequirements = listOf()
+                ),
+                PokemonModel.Evolution(
+                    before = "ivysaur",
+                    after = "venusaur",
+                    requirementLevel = 32,
+                    otherRequirements = listOf()
+                )
+            ), //anothercall
+            moves = listOf(
+                PokemonModel.Move("growl", 1),
+                PokemonModel.Move("tackle", 1),
+                PokemonModel.Move("vine-whip", 3),
+                PokemonModel.Move("growth", 6),
+                PokemonModel.Move("leech-seed", 9),
+                PokemonModel.Move("razor-leaf", 12),
+                PokemonModel.Move("poison-powder", 15),
+                PokemonModel.Move("sleep-powder", 15),
+                PokemonModel.Move("seed-bomb", 18),
+                PokemonModel.Move("take-down", 21),
+                PokemonModel.Move("sweet-scent", 24),
+                PokemonModel.Move("synthesis", 27),
+                PokemonModel.Move("worry-seed", 30),
+                PokemonModel.Move("double-edge", 33),
+                PokemonModel.Move("solar-beam", 36)
+            )
+        )
+
+        Assert.assertTrue(mantyke.toPokemonEntryModel() == expected)
     }
 }
