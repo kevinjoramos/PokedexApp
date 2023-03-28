@@ -24,7 +24,6 @@ data class PokemonModel(
     data class Breeding(
         val genderRate: Int,
         val eggGroups: String,
-        val eggCycle: String
     )
 
     data class BaseStats(

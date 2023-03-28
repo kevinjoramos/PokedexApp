@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Ability(
-    @JsonProperty("ability") val ability: AbilityX,
+    @JsonProperty("name") val name: String,
 )

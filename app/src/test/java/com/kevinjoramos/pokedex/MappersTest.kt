@@ -46,7 +46,6 @@ class MappersTest {
                 breeding = PokemonModel.Breeding(
                     genderRate = 1,
                     eggGroups = "Monster",
-                    eggCycle = "Grass" //another call
                 ),
                 baseExperience = 64
             ),

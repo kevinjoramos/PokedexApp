@@ -1,8 +1,9 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Type(
-    @JsonProperty("slot") val slot: Int,
-    @JsonProperty("type")  val type: TypeX
+    @JsonProperty("name") val name: String,
 )

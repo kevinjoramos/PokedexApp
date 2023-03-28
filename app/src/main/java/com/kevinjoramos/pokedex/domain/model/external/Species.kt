@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Species(
     @JsonProperty("egg_groups") val eggGroups: List<EggGroup>,
-    @JsonProperty("evolution_chain") val evolutionChain: EvolutionChain,
+    @JsonProperty("evolution_chain") val evolutionChain: EvolutionUrl,
     @JsonProperty("gender_rate") val genderRate: Int,
     @JsonProperty("genra") val genera: List<Genera>,
 )

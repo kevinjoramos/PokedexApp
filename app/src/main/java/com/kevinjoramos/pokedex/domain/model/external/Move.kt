@@ -5,6 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Move(
-    @JsonProperty("move") val move: MoveX,
-    @JsonProperty("version_group_details") val versionGroupDetails: List<VersionGroupDetail>
+    @JsonProperty("name") val name: String,
+    @JsonProperty("url") val url: String
 )

@@ -1,6 +1,10 @@
 package com.kevinjoramos.pokedex.domain.model.external
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class OfficialArtwork(
-    val front_default: String,
-    val front_shiny: String
+    @JsonProperty("front_default") val frontDefault: String,
+    @JsonProperty("front_shiny") val frontShiny: String
 )
