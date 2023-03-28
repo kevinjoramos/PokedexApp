@@ -10,7 +10,7 @@ data class PokemonModel(
     val baseStats: BaseStats,
     val evolution: List<Evolution>,
     val moves: List<Move>
-    ) {
+) {
 
     data class About(
         val species: String,
